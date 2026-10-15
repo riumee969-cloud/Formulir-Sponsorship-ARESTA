@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Sponsorship Aresta</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      margin: 0;
+      padding: 24px 15px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: auto;
+      background: white;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f766e;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+      background: white;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #99f6e4;
+      border-color: #0f766e;
+    }
+
+    .upload-box {
+      border: 2px dashed #94a3b8;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .upload-box input {
+      border: none;
+      padding: 8px 0;
+    }
+
+    .preview {
+      display: none;
+      max-width: 100%;
+      max-height: 240px;
+      margin-top: 12px;
+      border-radius: 8px;
+      object-fit: contain;
+      border: 1px solid #e2e8f0;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 6px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .btn-save {
+      background: #0f766e;
+      color: white;
+      width: 100%;
+    }
+
+    .btn-save:hover {
+      background: #115e59;
+    }
+
+    .btn-reset {
+      background: #e2e8f0;
+      color: #334155;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    #message {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    #message.success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    #message.error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Formulir Sponsorship Aresta</h1>
+    <p class="subtitle">
+      Formulir pendataan sponsor dan dokumentasi pembayaran
+    </p>
+
+    <form id="sponsorshipForm">
+      <div class="form-group">
+        <label for="namaSponsor">Nama Sponsor / Perusahaan *</label>
+        <input
+          type="text"
+          id="namaSponsor"
+          name="namaSponsor"
+          required
+          placeholder="Masukkan nama sponsor"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="namaKontak">Nama Penanggung Jawab *</label>
+        <input
+          type="text"
+          id="namaKontak"
+          name="namaKontak"
+          required
+          placeholder="Masukkan nama penanggung jawab"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="noTelepon">Nomor Telepon / WhatsApp *</label>
+        <input
+          type="tel"
+          id="noTelepon"
+          name="noTelepon"
+          required
+          placeholder="Contoh: 08xxxxxxxxxx"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="nama@email.com"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="paketSponsor">Paket Sponsorship *</label>
+        <select id="paketSponsor" name="paketSponsor" required>
+          <option value="">-- Pilih paket --</option>
+          <option value="Platinum">Platinum</option>
+          <option value="Gold">Gold</option>
+          <option value="Silver">Silver</option>
+          <option value="Bronze">Bronze</option>
+          <option value="Sponsor Lainnya">Sponsor Lainnya</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="nominal">Nominal Sponsorship (Rp) *</label>
+        <input
+          type="number"
+          id="nominal"
+          name="nominal"
+          min="0"
+          required
+          placeholder="Contoh: 1000000"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="gambarSponsor">1. Foto Sponsor / Logo Perusahaan *</label>
+        <div class="upload-box">
+          <input
+            type="file"
+            id="gambarSponsor"
+            accept="image/jpeg,image/png,image/webp"
+            required
+          >
+          <p class="hint">
+            Format JPG, PNG, atau WEBP. Maksimal 10 MB.
+          </p>
+          <img
+            id="previewSponsor"
+            class="preview"
+            alt="Pratinjau logo sponsor"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="buktiTransfer">
+          2. Foto Bukti Transfer / Dokumentasi *
+        </label>
+        <div class="upload-box">
+          <input
+            type="file"
+            id="buktiTransfer"
+            accept="image/jpeg,image/png,image/webp"
+            required
+          >
+          <p class="hint">
+            Unggah foto bukti pembayaran atau dokumentasi sponsor.
+            Maksimal 10 MB.
+          </p>
+          <img
+            id="previewTransfer"
+            class="preview"
+            alt="Pratinjau bukti transfer"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="catatan">Catatan Tambahan</label>
+        <textarea
+          id="catatan"
+          name="catatan"
+          rows="4"
+          placeholder="Tambahkan catatan jika diperlukan"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn-save">
+        Simpan Data Sponsorship
+      </button>
+
+      <button type="reset" class="btn-reset">
+        Reset Formulir
+      </button>
+
+      <div id="message" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script>
+    // Gunakan nama database dan key yang sama dengan halaman Database Input.
+    const STORAGE_KEY = "aresta_sponsorship_database_v1";
+    const DB_NAME = "ArestaSponsorshipImages";
+    const STORE_NAME = "gambar";
+    const MAX_SIZE = 10 * 1024 * 1024;
+
+    const form = document.getElementById("sponsorshipForm");
+    const message = document.getElementById("message");
+
+    const sponsorInput = document.getElementById("gambarSponsor");
+    const transferInput = document.getElementById("buktiTransfer");
+
+    let sponsorFile = null;
+    let transferFile = null;
+
+    // Membuka atau membuat database gambar.
+    function openDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, 1);
+
+        request.onupgradeneeded = function () {
+          const db = request.result;
+
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, {
+              keyPath: "id"
+            });
+          }
+        };
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    // Menyimpan file gambar sebagai Blob ke IndexedDB.
+    async function saveImage(id, file) {
+      const db = await openDatabase();
+
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction(
+          STORE_NAME,
+          "readwrite"
+        );
+
+        transaction.objectStore(STORE_NAME).put({
+          id: id,
+          blob: file,
+          namaFile: file.name,
+          tipe: file.type,
+          waktuSimpan: new Date().toISOString()
+        });
+
+        transaction.oncomplete = () => {
+          db.close();
+          resolve(id);
+        };
+
+        transaction.onerror = () => {
+          const error = transaction.error;
+          db.close();
+          reject(error);
+        };
+
+        transaction.onabort = () => {
+          const error = transaction.error;
+          db.close();
+          reject(error || new Error("Penyimpanan gambar dibatalkan."));
+        };
+      });
+    }
+
+    // Menghapus gambar dari IndexedDB.
+    async function deleteImage(id) {
+      if (!id) return;
+
+      const db = await openDatabase();
+
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction(
+          STORE_NAME,
+          "readwrite"
+        );
+
+        transaction.objectStore(STORE_NAME).delete(id);
+
+        transaction.oncomplete = () => {
+          db.close();
+          resolve();
+        };
+
+        transaction.onerror = () => {
+          const error = transaction.error;
+          db.close();
+          reject(error);
+        };
+      });
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type;
+    }
+
+    // Memeriksa file dan menampilkan pratinjau.
+    function setupUpload(input, previewId, type) {
+      const preview = document.getElementById(previewId);
+
+      input.addEventListener("change", function () {
+        const file = input.files[0];
+
+        if (type === "sponsor") sponsorFile = null;
+        if (type === "transfer") transferFile = null;
+
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+
+        if (!file) return;
+
+        const allowedTypes = [
+          "image/jpeg",
+          "image/png",
+          "image/webp"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+          input.value = "";
+          showMessage(
+            "Format gambar harus JPG, PNG, atau WEBP.",
+            "error"
+          );
+          return;
+        }
+
+        if (file.size > MAX_SIZE) {
+          input.value = "";
+          showMessage(
+            "Ukuran gambar tidak boleh lebih dari 10 MB.",
+            "error"
+          );
+          return;
+        }
+
+        if (type === "sponsor") sponsorFile = file;
+        if (type === "transfer") transferFile = file;
+
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        message.className = "";
+        message.style.display = "none";
+      });
+    }
+
+    setupUpload(sponsorInput, "previewSponsor", "sponsor");
+    setupUpload(transferInput, "previewTransfer", "transfer");
+
+    // Membuat ID unik untuk satu data sponsorship.
+    function createId() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+
+      return "aresta-" + Date.now() + "-" +
+        Math.random().toString(16).slice(2);
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      if (!sponsorFile || !transferFile) {
+        showMessage(
+          "Silakan unggah kedua foto terlebih dahulu.",
+          "error"
+        );
+        return;
+      }
+
+      const submitButton = form.querySelector(
+        'button[type="submit"]'
+      );
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Menyimpan...";
+
+      const id = createId();
+      const gambarId = id + "-sponsor";
+      const buktiTransferId = id + "-bukti";
+
+      try {
+        // Simpan kedua gambar terlebih dahulu.
+        await saveImage(gambarId, sponsorFile);
+
+        try {
+          await saveImage(buktiTransferId, transferFile);
+        } catch (error) {
+          await deleteImage(gambarId).catch(() => {});
+          throw error;
+        }
+
+        const records = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "[]"
+        );
+
+        const data = {
+          id: id,
+          namaSponsor:
+            document.getElementById("namaSponsor").value.trim(),
+          namaKontak:
+            document.getElementById("namaKontak").value.trim(),
+          noTelepon:
+            document.getElementById("noTelepon").value.trim(),
+          email:
+            document.getElementById("email").value.trim(),
+          paketSponsor:
+            document.getElementById("paketSponsor").value,
+          nominal:
+            Number(document.getElementById("nominal").value),
+          gambarId: gambarId,
+          buktiTransferId: buktiTransferId,
+          catatan:
+            document.getElementById("catatan").value.trim(),
+          tanggal:
+            new Date().toISOString()
+        };
+
+        try {
+          records.push(data);
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(records)
+          );
+        } catch (storageError) {
+          await Promise.all([
+            deleteImage(gambarId).catch(() => {}),
+            deleteImage(buktiTransferId).catch(() => {})
+          ]);
+          throw new Error(
+            "Data tidak dapat disimpan ke localStorage."
+          );
+        }
+
+        showMessage(
+          "Data sponsorship beserta kedua foto berhasil disimpan!",
+          "success"
+        );
+
+        form.reset();
+        sponsorFile = null;
+        transferFile = null;
+
+        document.getElementById("previewSponsor").style.display = "none";
+        document.getElementById("previewTransfer").style.display = "none";
+
+      } catch (error) {
+        console.error("Gagal menyimpan data:", error);
+
+        showMessage(
+          error.message ||
+            "Terjadi kesalahan saat menyimpan data. Silakan coba lagi.",
+          "error"
+        );
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Simpan Data Sponsorship";
+      }
+    });
+
+    // Bersihkan pratinjau ketika formulir di-reset.
+    form.addEventListener("reset", function () {
+      sponsorFile = null;
+      transferFile = null;
+
+      document.getElementById("previewSponsor").style.display = "none";
+      document.getElementById("previewTransfer").style.display = "none";
+
+      message.className = "";
+      message.textContent = "";
+      message.style.display = "none";
+    });
+  </script>
+</body>
+</html>
